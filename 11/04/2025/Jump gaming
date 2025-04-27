@@ -1,0 +1,25 @@
+class Solution(object):
+    def jump(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        n = len(nums)-1
+        max_step,count,i = -1,0,0
+        if n <= 0:
+            return count
+        while i < n:
+            if (i+nums[i]) >= n:
+                return count + 1
+            for curr in range(i+1,i+nums[i]+1):
+                if max_step <= nums[curr]:
+                    max_step = nums[curr]
+                    max_idx = curr 
+                max_step = max_step-1
+
+            count += 1
+            max_step = -1
+            if (i + nums[i]) >= (max_idx+nums[max_idx]):
+                i = nums[i]
+            else:
+                i = max_idx
