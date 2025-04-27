@@ -1,0 +1,35 @@
+class Solution(object):
+    def multiply(self, num1, num2):
+        """
+        :type num1: str
+        :type num2: str
+        :rtype: str
+        """
+
+#we need this incase the test case includes "0" 
+        if num1 == "0" or num2 == "0":
+            return  "0"
+    
+#here is the dictionary, when it receives the value on the left it will return the value on the right
+
+#for i.e dict[48] returns the value of 0
+        dict_int = {48:0, 49:1, 50:2, 51:3, 52:4, 53:5, 54:6, 55:7, 56:8, 57:9}
+
+#for reusability I decided to create a function
+        def convert_toInt(num):
+    
+            value = 0
+# the loop handles the int conversion then multiplied by according to its place value
+            for i in range(len(num)):
+
+                value += dict_int[ord(num[i])] * (10 ** (len(num) - 1 - i))
+                
+            return value
+        
+        num1 = convert_toInt(num1)
+        num2 = convert_toInt(num2)
+
+        product = num1 * num2
+#yey we are done, I read the rules and description and str function is not under the Big Integer Library :>
+
+        return str(product)
