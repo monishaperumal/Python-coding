@@ -1,0 +1,35 @@
+class Solution(object):
+    def grayCode(self, n):
+        """
+        :type n: int
+        :rtype: List[int]
+        """
+        res = []
+        def calc_dec(bin_num):
+            
+            num = 0
+            l = len(bin_num)
+            power = l - 1
+            for elem in bin_num:
+                num += int(elem) * (2 ** power)
+                power -= 1
+            return num
+
+        def calc(rem_n):
+            if rem_n == 1:
+                return ["0", "1"]
+            temp = calc(rem_n - 1)
+            curr_ans = []
+            for elem in temp:
+                new = "0" + elem
+                curr_ans.append(new)
+            for elem in temp[::-1]:
+                new = "1" + elem
+                curr_ans.append(new)
+            return curr_ans
+        res = calc(n)
+        lr = len(res)
+        for i in range(lr):
+            elem = res[i]
+            res[i] = calc_dec(elem)
+        return res
